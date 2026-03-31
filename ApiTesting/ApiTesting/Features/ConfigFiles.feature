@@ -1,7 +1,6 @@
 Feature: Configuration File
 
-Simple calculator for adding two numbers
+Simple test to show how to read config files
 
-@mytag
-Scenario: Add two numbers
+Scenario: Read confg file
 	Then the hostname is "localhost"
