@@ -1,3 +1,4 @@
+using System.Net.Http;
 using ApiTesting.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,6 +27,13 @@ public class StartService
         
         var configFile = configuration.Get<ConfigurationFile>();
         service.AddSingleton(configFile);
+
+        var client = new HttpClient()
+        {
+            BaseAddress = configFile.BaseUrl
+        };
+        
+        service.AddSingleton(client);
         
         return service;
     }
