@@ -65,7 +65,7 @@ jobs:
         fetch-depth: 0
         
     - name: Replace tokens in config
-      uses: lambdaspire/substitute-secrets-into-tokenised-file@v1.0.1
+      uses: Lambdaspire/action-substitute-secrets-in-file@v1.1.0
       with:
         file: Config.json
 
