@@ -63,6 +63,11 @@ jobs:
       uses: actions/checkout@v4
       with:
         fetch-depth: 0
+        
+    - name: Replace tokens in config
+      uses: lambdaspire/substitute-secrets-into-tokenised-file@v1.0.1
+      with:
+        file: Config.json
 
     # Install the .NET Core workload
     - name: Install .NET Core
