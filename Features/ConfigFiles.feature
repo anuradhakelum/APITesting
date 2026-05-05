@@ -8,3 +8,7 @@ Scenario: Read confg file
 Scenario: Get objects
 	When the user hit the access point
 	Then the response code is 200
+	
+Scenario: Get collections
+	When the user hits the collection endpoint
+	Then the response code is 200
