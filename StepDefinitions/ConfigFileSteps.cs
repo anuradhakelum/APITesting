@@ -40,4 +40,13 @@ public sealed class ConfigFileSteps(
         var actualStatusCode = responsecontext.responseMessage;
         actualStatusCode.StatusCode.Should().Be((HttpStatusCode)expectedStatusCode);
     }
+
+    [When("the user hits the collection endpoint")]
+    public async Task WhenTheUserHitsTheCollectionEndpoint()
+    {
+        httpClient.DefaultRequestHeaders.Add("x-api-key", configuration.Token);
+        var response = await httpClient.GetAsync("collections");
+        var res = JsonSerializer.Deserialize<List<GetObjectResponse>>(await response.Content.ReadAsStringAsync());
+        responsecontext.responseMessage = response;
+    }
 }
