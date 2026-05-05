@@ -68,6 +68,8 @@ jobs:
       uses: Lambdaspire/action-substitute-secrets-in-file@v1.1.0
       with:
         file: Config.json
+        tokenPattern: '${API_KEY}'
+        secretsJson: ${{ toJSON(secrets) }}
 
     # Install the .NET Core workload
     - name: Install .NET Core
