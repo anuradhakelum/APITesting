@@ -46,7 +46,24 @@ public sealed class ConfigFileSteps(
     {
         httpClient.DefaultRequestHeaders.Add("x-api-key", configuration.Token);
         var response = await httpClient.GetAsync("collections");
-        var res = JsonSerializer.Deserialize<List<GetObjectResponse>>(await response.Content.ReadAsStringAsync());
+    
+        // Store the response for assertion
         responsecontext.responseMessage = response;
+    
+        // Only deserialize if the response is successful
+        if (response.IsSuccessStatusCode)
+        {
+            var content = await response.Content.ReadAsStringAsync();
+            try
+            {
+                var res = JsonSerializer.Deserialize<List<GetObjectResponse>>(content);
+            }
+            catch (JsonException ex)
+            {
+                reqnrollOutputHelper.WriteLine($"Failed to deserialize response: {ex.Message}");
+                reqnrollOutputHelper.WriteLine($"Response content: {content}");
+                throw;
+            }
+        }
     }
 }
